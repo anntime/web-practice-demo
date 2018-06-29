@@ -1,0 +1,39 @@
+<!DOCTYPE  HTML>
+<html >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系好安全带,准备启航</title>
+
+<script type="text/javascript">
+
+//通过javascript的日期对象来得到当前的日期，并输出。
+var _date= new Date();
+var _year= _date.getFullYear(), //获取年份
+_month= _date.getMonth()+1,  //获取月份
+_Date= _date.getDate(), //获取天数
+_day= _date.getDay(), //获取星期几用到的
+_week= ["星期天","星期一","星期二","星期三","星期四","星期五","星期六"]; //获取星期几的数组
+
+//成绩是一长窜的字符串不好处理，找规律后分割放到数组里更好操作哦
+var scoreStr = "小明:87;小花:81;小红:97;小天:76;小张:74;小小:94;小西:90;小伍:76;小迪:64;小曼:76";
+var arr= scoreStr.split(";"); //split可以分割字符串为数组，join可以分割数组为字符串
+document.write(arr[0]);
+var _length=arr.length; //获取数组的长度
+var sum= 0; //声明变量sum求和
+for(var i= 0;i<_length;i++ ){
+    //每次循环自加,substring是为了找到每个数组内的分数,如87、81之类的这些分数
+    sum = sum+parseInt(arr[i].substring(3,5));
+};
+
+//从数组中将成绩撮出来，然后求和取整，并输出。
+//求平均数
+var num= Math.round(sum/_length);
+
+//打印输出
+document.write(_year+"年"+_month+"月"+_Date+"日"+"&nbsp&nbsp"+_week[_day]+"--班级总分为:"+num)
+
+</script>
+</head>
+<body>
+</body>
+</html>

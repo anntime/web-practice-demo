@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>旧风格</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+		<script src="avalon.js"></script>
+		<script>
+			var model=avalon.define({
+				$id:"ms-class",
+				toggle:true,
+				click:function(e){
+					model.toggle=!model.toggle
+				}
+			})
+		</script>
+		<style>
+			.test{
+				width:100px;
+				height:100px;
+				border:1px solid red;
+				color:red;
+				-webkit-user-select:none;
+				-moz-user-select:none;
+				-ms-user-select:none;
+				-o-user-select:none;
+				user-select:none;
+			}
+			.aaa{
+				color:yellow;//控制的字体的颜色
+				border:1px solid blue;
+			}
+		</style>
+	</head>
+	<body ms-controller="ms-class">
+		<div class="test" ms-class-aaa="toggle" ms-click="click">点我</div>
+	</body>
+</html>

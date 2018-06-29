@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title></title>
+<!--        <script src="../avalon.js" type="text/javascript"></script>-->
+       <script src="avalon.repeat.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            //   var id
+            var test = avalon.define("test", function(vm) {
+                vm.array = [{id: 1}, {id: 2}, {id: 3}, {id: 4}]
+
+            });
+            
+            setTimeout(function(){
+                test.array.push({id: 5})
+                test.array[4].$model.xxx = "))))"
+            })
+
+        </script>
+    </head>
+    <body>
+        <div ms-controller="test">
+            <ul>
+                <li ms-repeat="array">
+                    {{el.id}}
+                </li>
+            </ul>
+
+        </div>
+    </body>
+</html>

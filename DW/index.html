@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>监控模块</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+		<!--导航栏-->
+		<link href="./Minimal_files/bootstrap.css" rel="stylesheet">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	    <!--link href="./Minimal_files/font-awesome.css" rel="stylesheet"-->
+		<link href="./Minimal_files/minimal.css" rel="stylesheet"> 
+		<link href="./monitor.css" rel="stylesheet"> 
+		
+		<script src="./js/avalon.js"></script>
+		<script>
+            avalon.config({
+                loader: false,
+				interpolate:["{%","%}"]
+            })
+        </script>
+		<script src="./js/echarts.js"></script>
+        <script src="./js/jquery.min.js"></script>
+		<script src="./js/monitor.js"></script>
+		<script>
+			require.config({
+				paths: {
+					echarts: '../Public/js'
+				}
+			});
+			require(
+				[
+					'echarts',
+					'echarts/chart/map',
+					'echarts/chart/pie',
+					'echarts/chart/bar',
+					'echarts/chart/line'
+				],
+				InitEharts
+			); 
+		</script>
+	</head>
+	<body style="position: relative;" class="bg-1">
+		<div class="mm-page">
+			<div class="adcenter">	
+			</div>
+			<div class="mask" style="display:none">
+				<div id="loader" style="display:none"></div>
+			</div>
+			<div id="wrap">
+				<!-- Make page fluid -->
+				<div class="row">
+					<!-- Fixed navbar -->
+					<div id="navbar" class="navbar navbar-default navbar-fixed-top navbar-transparent-black mm-fixed-top">
+						<!-- Branding -->
+						<div class="navbar-header col-md-2">
+							<a class="navbar-brand" href="#">
+								<strong>监控</strong>模块
+							</a>
+							<div class="sidebar-collapse">
+							  <a href="#">
+								<i class="fa fa-bars"></i>
+							  </a>
+							</div>
+						</div>
+						<!-- Branding end -->
+						<!-- .nav-collapse -->
+						<div class="navbar-collapse">
+							<!-- Page refresh -->
+							<ul class="nav navbar-nav refresh">
+							  <li class="divided">
+								<a href="#" class="page-refresh"><i class="fa fa-refresh"></i></a>
+							  </li>
+							</ul>
+							<!-- /Page refresh -->
+							<!-- Search -->
+							<div class="search" id="main-search">
+							  <i class="fa fa-search"></i> 
+							  <input placeholder="Search..." type="text">
+							</div>
+							<!-- Search end -->
+							<!-- Quick Actions -->
+							<ul class="nav navbar-nav quick-actions">
+							  
+								<li class="dropdown divided">
+
+									<a class="dropdown-toggle button" data-toggle="dropdown" href="#">
+									  <i class="fa fa-tasks"></i>
+									  <span class="label label-transparent-black">2</span>
+									</a>
+								</li>
+								<li class="dropdown divided">
+									<a class="dropdown-toggle button" data-toggle="dropdown" href="#">
+									  <i class="fa fa-envelope"></i>
+									  <span class="label label-transparent-black">1</span>
+									</a>
+								</li>
+								<li class="dropdown divided">
+                
+									<a class="dropdown-toggle button" data-toggle="dropdown" href="#">
+									  <i class="fa fa-bell"></i>
+									  <span class="label label-transparent-black">3</span>
+									</a>
+								</li>
+							</ul>
+							<!-- Sidebar -->
+							<ul tabindex="5000" style="overflow: hidden;" class="nav navbar-nav side-nav" id="sidebar">
+								<li class="navigation" id="navigation">
+									<a href="#" class="sidebar-toggle" data-toggle="#navigation">Navigation 
+									<i class="fa fa-angle-up"></i>
+									</a>
+									<ul class="menu">
+										<li class="active">
+											<a href="#">
+											  <i class="fa fa-tachometer"></i> Dashboard
+											  <span class="badge badge-red">1</span>
+											</a>
+										</li>
+
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+											  <i class="fa fa-list"></i> Forms <b class="fa fa-plus dropdown-plus"></b>
+											</a>
+											<ul class="dropdown-menu">
+											  <li>
+												<a href="#">
+												  <i class="fa fa-caret-right"></i> Common Elements
+												</a>
+											  </li>
+											  <li>
+												<a href="#">
+												  <i class="fa fa-caret-right"></i> Validation
+												</a>
+											  </li>
+											  <li>
+												<a href="#">
+												  <i class="fa fa-caret-right"></i> Form Wizard
+												</a>
+											  </li>
+											</ul>
+										</li> 
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+											  <i class="fa fa-pencil"></i> Interface <b class="fa fa-plus dropdown-plus"></b>
+											</a>
+											<ul class="dropdown-menu">
+											  <li>
+												<a href="#">
+												  <i class="fa fa-caret-right"></i> UI Elements
+												</a>
+											  </li>
+											  <li>
+												<a href="#">
+												  <i class="fa fa-caret-right"></i> Typography
+												</a>
+											  </li>
+											  <li>
+												<a href="#">
+												  <i class="fa fa-caret-right"></i> Tiles
+												</a>
+											  </li>
+											</ul>
+										</li>
+										<li class="">
+											<a href="#">
+											  <i class="fa fa-tint"></i> Buttons &amp; Icons
+											</a>
+										</li>
+											<li class="">
+											<a href="#">
+											  <i class="fa fa-th"></i> Grid Layout
+											</a>
+											</li>
+
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+											  <i class="fa fa-th-large"></i> Tables <b class="fa fa-plus dropdown-plus"></b>
+											</a>
+											<ul class="dropdown-menu">
+											  <li>
+												<a href="#">
+												  <i class="fa fa-caret-right"></i> Bootstrap Tables
+												</a>
+											  </li>
+											  <li>
+												<a href="#">
+												  <i class="fa fa-caret-right"></i> DataTables
+												</a>
+											  </li>
+											</ul>
+										</li>
+
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+											  <i class="fa fa-desktop"></i> Example Pages <b class="fa fa-plus dropdown-plus"></b>
+											  <span class="label label-greensea">mails</span>
+											</a>
+											<ul class="dropdown-menu">
+											  <li>
+												<a href="#">
+												  <i class="fa fa-caret-right"></i> Login Page
+												</a>
+											  </li>
+											  <li>
+												<a href="#">
+												  <i class="fa fa-caret-right"></i> Calendar
+												</a>
+											  </li>
+											  <li>
+												<a href="#">
+												  <i class="fa fa-caret-right"></i> Page 404
+												</a>
+											  </li>
+											  <li>
+												<a href="#">
+												  <i class="fa fa-caret-right"></i> Page 500
+												</a>
+											  </li>
+											  <li>
+												<a href="#">
+												  <i class="fa fa-caret-right"></i> Page Offline
+												</a>
+											  </li>
+											  <li>
+												<a href="#">
+												  <i class="fa fa-caret-right"></i> Gallery
+												</a>
+											  </li>
+											  <li>
+												<a href="#">
+												  <i class="fa fa-caret-right"></i> Timeline
+												</a>
+											  </li>
+											  <li>
+												<a href="#">
+												  <i class="fa fa-caret-right"></i> Vertical Mail
+												  <span class="badge badge-red">5</span>
+												</a>
+											  </li>
+											  <li>
+												<a href="#">
+												  <i class="fa fa-caret-right"></i> Horizontal Mail
+												  <span class="label label-greensea">mails</span>
+												</a>
+											  </li>
+											  <li>
+												<a href="#">
+												  <i class="fa fa-caret-right"></i> Vector Maps
+												</a>
+											  </li>
+											  <li>
+												<a href="#">
+												  <i class="fa fa-caret-right"></i> Google Maps
+												</a>
+											  </li>
+											</ul>
+										</li>
+
+										<li class="">
+											<a href="#">
+											  <i class="fa fa-play-circle"></i> Widgets
+											</a>
+										</li>
+
+										<li class="">
+											<a href="#">
+											  <i class="fa fa-bar-chart-o"></i> Charts &amp; Graphs
+											</a>
+										</li>
+									</ul>
+								</li>
+								<li class="summary" id="order-summary">
+									<a href="#" class="sidebar-toggle underline" data-toggle="#order-summary">
+									Orders Summary <i class="fa fa-angle-up"></i>
+									</a> 
+									<div class="media">
+									  <a class="pull-right" href="#">
+										<span id="sales-chart"><canvas height="40" width="69" style="display: inline-block; width: 69px; height: 40px; vertical-align: top;"></canvas></span>
+									  </a>
+									  <div class="media-body">
+										This week sales
+										<h3 class="media-heading">26, 149</h3>
+									  </div>
+									</div>
+
+									<div class="media">
+									  <a class="pull-right" href="#">
+										<span id="balance-chart"><canvas height="40" width="69" style="display: inline-block; width: 69px; height: 40px; vertical-align: top;"></canvas></span>
+									  </a>
+									  <div class="media-body">
+										This week balance
+										<h3 class="media-heading">318, 651</h3>
+									  </div>
+									</div>
+								</li>
+								<li class="settings" id="general-settings">
+									<a href="#" class="sidebar-toggle underline" data-toggle="#general-settings">General Settings <i class="fa fa-angle-up"></i>
+									</a> 
+									<div class="form-group">
+									  <label class="col-xs-8 control-label">Switch ON</label>
+									  <div class="col-xs-4 control-label">
+										<div class="onoffswitch greensea">
+										  <input name="onoffswitch" class="onoffswitch-checkbox" id="switch-on" checked="checked" type="checkbox">
+										  <label class="onoffswitch-label" for="switch-on">
+											<span class="onoffswitch-inner"></span>
+											<span class="onoffswitch-switch"></span>
+										  </label>
+										</div>
+									  </div>
+									</div>
+
+									<div class="form-group">
+									  <label class="col-xs-8 control-label">Switch OFF</label>
+									  <div class="col-xs-4 control-label">
+										<div class="onoffswitch greensea">
+										  <input name="onoffswitch" class="onoffswitch-checkbox" id="switch-off" type="checkbox">
+										  <label class="onoffswitch-label" for="switch-off">
+											<span class="onoffswitch-inner"></span>
+											<span class="onoffswitch-switch"></span>
+										  </label>
+										</div>
+									  </div>
+									</div>
+								</li>
+							</ul>
+							<!-- Sidebar end-->
+						</div>
+						<!-- .nav-collapse end-->
+					</div>
+					<!-- Fixed navbar Over-->
+				<!-- Page content -->
+					<div tabindex="5001" style="overflow: hidden; padding-left: 265px;" id="content" class="col-md-12">
+						<!-- page header -->
+						<div class="pageheader"> 
+							<h2>
+								<i class="fa fa-tachometer"></i> 
+								系统参数
+								<span>在此一览...</span>
+							</h2> 
+							<div class="breadcrumbs">
+							  <ol class="breadcrumb">
+								<li>You are here</li>
+								<li><a href="#">Minimal</a></li>
+								<li class="active">Dashboard</li>
+							  </ol>
+							</div> 
+						</div>
+						<!-- /page header -->
+						<!-- content main container -->
+						<div class="main"> 
+							<!-- cards -->
+							<div class="row cards">
+								<div class="card-container col-lg-3 col-sm-6 col-sm-12">
+									<div class="card card-redbrown hover">
+										<div class="front">
+											<div class="media">
+												<span class="pull-left">
+												<i class="fa fa-exchange fa-4x"></i>
+												</span>
+												<div class="media-body">
+													<small>今日交互次数</small>
+													<h2 class="media-heading animate-number" data-value="3659" data-animation-duration="1500">3,659</h2>
+												</div>
+											</div>
+											<div class="progress-list">
+												<div class="details">
+													<div class="title">占历史次数的百分比</div>
+												</div>
+												<div class="status pull-right bg-transparent-black-1">
+													<span class="animate-number" data-animation-duration="1500" data-value="83">83</span>%
+												</div>
+												<div class="clearfix"></div>
+												<div class="progress progress-little progress-transparent-black">
+													<div class="progress-bar animate-progress-bar" data-percentage="83%" style="width: 83%;"></div>
+												</div>
+											</div>
+										</div>
+										<div class="back">
+											<a href="#">
+											<i class="fa fa-bar-chart-o fa-4x"></i>
+											<span>Check Summary</span>
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="card-container col-lg-3 col-sm-6 col-sm-12">
+									<div class="card card-blue hover">
+										<div class="front">
+											<div class="media">
+												<span class="pull-left">
+												<i class="fa fa-users media-object"></i>
+												</span>
+												<div class="media-body">
+													<small>用户总数</small>
+													<h2 class="media-heading animate-number" data-value="3659" data-animation-duration="1500">3,659</h2>
+												</div>
+											</div>
+											<div class="progress-list">
+												<div class="details">
+													<div class="title">占系统可承受的百分比</div>
+												</div>
+												<div class="status pull-right bg-transparent-black-1">
+													<span class="animate-number" data-animation-duration="1500" data-value="60">60</span>%
+												</div>
+												<!--控制进度条-->
+												<div class="clearfix"></div>
+												<div class="progress progress-little progress-transparent-black">
+													<div class="progress-bar animate-progress-bar" data-percentage="60%" style="width: 60%;"></div>
+												</div>
+											</div>
+										</div>
+										<div class="back">
+											<a href="#">
+											<i class="fa fa-bar-chart-o fa-4x"></i>
+											<span>Check Summary</span>
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="card-container col-lg-3 col-sm-6 col-sm-12">
+									<div class="card card-greensea  hover">
+										<div class="front">
+											<div class="media">
+												<span class="pull-left">
+												<i class="fa fa-globe fa-4x"></i>
+												</span>
+												<div class="media-body">
+													<small>网络环境</small>
+													<h2 class="media-heading animate-number" data-value="3659" data-animation-duration="1500">3,659</h2>
+												</div>
+											</div>
+											<div class="progress-list">
+												<div class="details">
+													<div class="title">占所有环境的百分比</div>
+												</div>
+												<div class="status pull-right bg-transparent-black-1">
+													<span class="animate-number" data-animation-duration="1500" data-value="83">24</span>%
+												</div>
+												<div class="clearfix"></div>
+												<div class="progress progress-little progress-transparent-black">
+													<div class="progress-bar animate-progress-bar" data-percentage="24%" style="width: 24%;"></div>
+												</div>
+											</div>
+										</div>
+										<div class="back">
+											<a href="#">
+											<i class="fa fa-bar-chart-o fa-4x"></i>
+											<span>Check Summary</span>
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="card-container col-lg-3 col-sm-6 col-sm-12">
+									<div class="card card-slategray  hover">
+										<div class="front">
+											<div class="media">
+												<span class="pull-left">
+												<i class="fa fa-key fa-4x"></i>
+												</span>
+												<div class="media-body">
+													<small>请求权限</small>
+													<h2 class="media-heading animate-number" data-value="3659" data-animation-duration="1500">3</h2>
+												</div>
+											</div>
+											<div class="progress-list">
+												<div class="details">
+													<div class="title">占所有权限的百分比</div>
+												</div>
+												<div class="status pull-right bg-transparent-black-1">
+													<span class="animate-number" data-animation-duration="1500" data-value="20">20</span>%
+												</div>
+												<div class="clearfix"></div>
+												<div class="progress progress-little progress-transparent-black">
+													<div class="progress-bar animate-progress-bar" data-percentage="20%" style="width: 20%;"></div>
+												</div>
+											</div>
+										</div>
+										<div class="back">
+											<a href="#">
+											<i class="fa fa-bar-chart-o fa-4x"></i>
+											<span>Check Summary</span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /cards -->
+							<!-- row -->
+							<div class="row">
+								<!-- col 8 -->
+								<div class="col-lg-8 col-md-12">
+									<!-- tile -->
+									<section class="tile transparent">
+										<!-- tile header -->
+										<div class="tile-header color transparent-black textured rounded-top-corners">
+											<h1><strong>当天动态</strong>交互次数</h1>
+											<div class="controls">
+											  <a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
+											  <a href="#" class="remove"><i class="fa fa-times"></i></a>
+											</div>
+										</div>
+										<!-- /tile header -->
+										<!-- tile widget -->
+										<div class="tile-widget color transparent-black textured">
+											<!--绘制表格-->
+											<div style="height: 250px; padding: 0px; position: relative;">
+												<div  class="stackedLine" id="stackedLine" style="height: 250px; width:600px"  ></div> 
+											</div>
+											<!--表格绘制结束-->
+										</div>
+										<!--/title widget-->
+									</section>
+									<!--/title-->
+								</div>
+								<!--/col 8-->
+							</div>
+							<!-- /row -->
+						</div>
+						<!-- /content main container -->
+					</div>
+				</div>
+				<!-- Make page fluid Over-->
+			</div>
+		</div>
+	</body>
+</html>

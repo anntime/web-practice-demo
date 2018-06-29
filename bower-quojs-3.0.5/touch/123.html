@@ -1,0 +1,35 @@
+<!doctype html>
+<html class="no-js"> 
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="touch.min.js"></script>
+    <script>
+    	 
+    	
+			console.log("hello~~~ok!!");
+			$(document).ready(function(){
+				console.log("hello~~~ok!!");
+				touch.on('#target', 'touchstart', function(ev){
+					ev.preventDefault();
+					console.log("123.");
+				});
+				var target = document.getElementById("target"); 
+
+				touch.on("#target", 'swiperight', function(ev){ 
+					console.log("向右滑动.");
+				});
+
+				touch.on("#target", 'swipeleft', function(ev){
+					console.log("向左滑动."); 
+				});
+			})
+	</script>
+</head>
+
+
+<body>
+	<div id="target" style="width:500px;height:500px;background:red;"></div>
+
+</body>
+</html>

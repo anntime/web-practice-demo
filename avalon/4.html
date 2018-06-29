@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <script src="avalon.js"></script>
+        <script>
+            avalon.define("theme", function(vm) {
+                vm.options = {
+				//$key=>$val
+                    "start": "start",
+                    "smoothness": "smoothness",
+                    "flick": "flick",
+                    "sunny": "sunny",
+                    "excite-bike": "excite bike",
+                    "black-tie": "black tie",
+                    "trontastic": "trontastic",
+                    "swanky-purse": "swanky purse",
+                    "le-frog": "le frog",
+                    "blitzer": "blitzer",
+                    "dot-luv": "dot luv",
+                    "mint-choc": "mint-choc",
+                    "hot-sneaks": "hot sneaks",
+                    "south-street": " south street",
+                    "humanity": "humanity",
+                    "vader": "vader",
+                    "eggplant": "eggplant",
+                    "cupertino": "cupertino",
+                    "overcast": "overcast",
+                }
+                vm.theme = "black-tie"
+                vm.a="hello"
+                
+            })
+ function change(){
+                    if(theme.a==="hello"){
+                       theme.a="你好" 
+                    } 
+                }
+        </script>
+    </head>
+    <body ms-controller="theme">
+        <div >
+            <link rel="stylesheet" ms-href="http://code.jquery.com/ui/1.10.3/themes/{{theme}}/jquery-ui.css" >
+            <select ms-duplex="theme" >
+                <option  ms-repeat="options" ms-attr-value="$key">{{$val}}</option>
+            </select>{{theme}}
+        </div>
+        {{a}}
+        <button value="改变" onclick="change()"></button>
+    </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>TODO supply a title</title>
+		<meta charset="utf-8">
+		<!--网页宽度默认等于屏幕宽度-->
+		<meta name="viewport" content="width=device-width">
+		<script src="avalon.js"></script>
+		<script>
+			var vm=avalon.define({
+				$id:"test",
+				aaa:"aaa"
+			})
+			vm.$watch("aaa",function(newvalue,oldvalue){
+				if(newvalue.length>8){
+					vm.aaa=oldvalue
+				}
+			})
+		</script>
+	</head>
+	<body>
+		<div ms-controller="test">
+			<input ms-duplex="aaa"/>{{aaa}}
+		</div>
+	</body>
+</html>

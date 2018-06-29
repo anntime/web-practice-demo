@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="avalon.js"></script>
+        <script>
+            var model = avalon.define("test", function(vm) {
+                vm.color = "green"
+                vm.clickfn = function(){
+                    vm.color = '#'+(Math.random()*0xffffff<<0).toString(16);
+                }
+            })
+        </script>
+    </head>
+    <body>
+        <div  ms-controller="test">
+            <div style="width:200px;height:200px" ms-css-background="color"></div>
+            <button type="button" ms-click="clickfn">每点我一次都改变颜色</button>
+        </div>
+    </body>
+</html>

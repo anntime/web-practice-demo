@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</head>
+	<script src="avalon.js"></script>
+	<body>
+	<script type="text/javascript">
+		var gg=[{"id":"1","title":"公告文章标题1"},{"id":"2","title":"公告文章标题2"},{"id":"3","title":"公告文章标题3"},{"id":"4","title":"公告文章标题4"}];
+		var bd=[{"id":"1","title":"媒体报道文章标题1"},{"id":"2","title":"媒体报道文章标题2"},{"id":"3","title":"媒体报道文章标题3"},{"id":"4","title":"媒体报道文章标题4"}];
+		var vm = avalon.define({
+			$id:"list",
+			more_name:"gg",
+			more_text:"更多公告",
+			gg:gg,
+			bd:bd,
+			infoList:gg,
+			changeUL:function(flag){
+				if(flag){
+					vm.more_name="gg";
+					vm.more_text="更多公告";
+					vm.infoList=vm.gg;
+				}else{
+					vm.more_name="bd";
+					vm.more_text="更多报道";
+					vm.infoList=vm.bd;
+				}
+			}
+		});
+		avalon.scan();
+	</script>
+		<div ms-controller="list">
+		  <span ms-mouseover="changeUl(1)">公告</span>
+		  <span ms-mouseover="changeUL(0)">媒体报道</span>
+		  <a ms-href="'#!/'+ more_name">{{more_text}}</a>
+		  <ul>
+			<li ms-repeat="infoList">
+			  <a ms-href="'#!/'+ more_name + '/' + el.id" ms-title="el.title">{{el.title}}</a>
+			</li>
+		  </ul>
+		</div>
+	
+	</body>
+</html>
+	

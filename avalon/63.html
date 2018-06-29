@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>TODO supply a title</title>
+		<meta charset="utf-8">
+		<!--网页宽度默认等于屏幕宽度-->
+		<meta name="viewport" content="width=device-width">
+		<script src="avalon.js"></script>
+		<script>
+			var vm=avalon.define({
+				$id:"test",
+				aaa:"111",
+			})
+			//添加一个拦截器
+			avalon.duplexHooks.limit={
+				get: function(str, data) {
+                    var limit = parseFloat(data.element.getAttribute("data-duplex-limit"))
+                    if (str.length > limit) {
+                        return data.element.value = str.slice(0, limit)
+                    }
+                    return str
+                }
+			}
+		</script>
+	</head>
+	<body>
+		<div ms-controller="test">
+			<input ms-duplex-limit="aaa" data-duplex-limit="8"/> {{aaa}}
+        </div>
+    </body>
+</html>

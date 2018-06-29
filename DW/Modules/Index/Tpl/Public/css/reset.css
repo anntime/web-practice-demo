@@ -1,0 +1,63 @@
+
+html, body {
+    font-family: Tahoma,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100%;
+}
+html, body, html, div, p, strong, span, em, i, img, dl, ol, ul, li, dt, dd {
+    margin: 0;
+    padding: 0;
+}
+ol, ul, li {
+    list-style: outside none none;
+}
+a {
+    color: #0082e5;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 10px 0;
+}
+dt {
+    font-weight: normal;
+}
+.clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.disable {
+    color: #999;
+    cursor: default;
+}
+.radio label.disable, .checkbox label.disable {
+    cursor: default;
+}
+.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    background-color: #007bd8;
+    border-color: #0074cc;
+    border-radius: 0;
+}
+html input.error, html textarea.error {
+    border-color: #ee5238;
+    box-shadow: 0 0 2px #ee5238 inset;
+    outline-color: #ee5238;
+}
+.dropdown-toggle .caret {
+    position: absolute;
+    right: 8px;
+    top: 16px;
+}
+.high-light {
+    color: #0082e5;
+}
+.red-light {
+    color: #812626;
+}
+.disable-light {
+    color: #999;
+}

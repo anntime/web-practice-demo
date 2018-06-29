@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script src="avalon.js"></script>
+        <script>
+			var $info = avalon.define("news", function(vm) {
+                    vm.news = [[{
+                                Title: "职场：先升值，再升职",
+                                StartDate: '2013-06-1',
+                                EndDate: '2013-06-8'
+                            },
+                            {
+                                Title: "沟通：先求同，再求异",
+                                StartDate: '2013-07-9',
+                                EndDate: '2013-08-1'
+                            },
+                            {
+                                Title: "执行：先完成，再完美",
+                                StartDate: '2013-06-24',
+                                EndDate: '2013-08-23'
+                            }, {
+                                Title: "学习：先记录，再记忆",
+                                StartDate: '2013-01-1',
+                                EndDate: '2013-2-13'
+                            }]]
+                });
+                setTimeout(function() {
+                    $info.news.push([{
+                            Title: "《杀手已死》发售纪念PV！电锯甜心女主角登场确定",
+                            StartDate: '2013-11-3',
+                            EndDate: '2013-12-5'
+                        },
+                        {
+                            Title: "《無双OROCHI 2 Ultimate》《灵魂能力》系列索菲蒂亚参战！新剧情追加！杂志图公开！",
+                            StartDate: '2013-3-24',
+                            EndDate: '2013-04-6'
+                        },
+                        {
+                            Title: "Capcom经典RPG《龙战士》正统续作《龙战士6》正式公布",
+                            StartDate: '2013-7-13',
+                            EndDate: '2013-08-18'
+                        }, {
+							 Title: "Oddworld Inhabitants创始人，大任天堂帝国将会屹立百年不倒",
+                            StartDate: '2013-9-2',
+                            EndDate: '2013-10-1'
+                        }]);
+                }, 4000)
+                setTimeout(function() {
+                    $info.news.push([{
+                            Title: "吐血大奉献，打造cnblogs最新最火辣的css3模板",
+                            StartDate: '2010-1-8',
+                            EndDate: '2012-11-4'
+                        },
+                        {
+                            Title: "WinForm程序界面假死，寻求完美解决方案",
+                            StartDate: '2009-7-02',
+                            EndDate: '2011-04-5'
+                        },
+                        {
+                            Title: "什么样的互联网创业者不靠谱？",
+                            StartDate: '2008-7-13',
+                            EndDate: '2013-8-18'
+                        }, {
+                            Title: "MOTO X正式发布：两千多种定制选项",
+                            StartDate: '2010-1-1',
+                            EndDate: '2012-2-3'
+                        }]);
+                }, 8000)
+			</script>
+		</head>
+		<body>
+			<table  id="news_table" >
+				<thead>
+					<tr id="news_head" ms-each-index="[1,2,3,4]">
+						<th>
+							栏目{{index}}
+						</th>
+					</tr>
+				</thead>
+				<tbody ms-controller="news" ms-each-item="news">
+					<tr ms-class="last_row: $last" ms-each-data="item">
+						<td>
+							{{data.Title|truncate(20,"……")}}
+							<p>{{data.StartDate}} 至 {{data.EndDate}} </p>
+						</td>                                           
+					</tr>                                       
+				</tbody>
+			</table>

@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3672694-9']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?fa98b91e638fc607d0335693fb173e7f";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript" src="http://cbjs.baidu.com/js/s.js"></script>
+<style type="text/css">
+body{position:relative;margin:0;padding:55px 0 0 0;}
+#demo_menu{position:absolute;top:0;left:0;width:100%;height:50px;line-height:50px;background:url(/statics/images/my/menu_bg.png) repeat-x;z-index:800;font-size:14px;text-align:center;color:#999;line-height:180%;border-bottom:1px solid #8A961C;}
+#demo_menu .top_menu{width:1080px;margin:0 auto;color:#000;font-size:12px;overflow:hidden;z-index:1000;}
+#demo_menu .top_menu strong{width:195px;display:block;height:50px;float:left;background:url(/statics/images/my/logo.png) no-repeat 0 8px;}
+#demo_menu .top_left{float:left;width:550px;height:50px;line-height:50px;z-index:9999;overflow:hidden;}
+#demo_menu .top_left ul{width:550px;float:right;overflow:hidden;list-style: none;margin:0;padding:0;}
+#demo_menu .top_left li{float:left;margin:0 15px 0 0;padding:0;text-align:center;}
+#demo_menu .top_left li a,#demo_menu .top_left li a:visited{font-size:14px;font-weight:bold;color:#333;text-decoration:none;width:60px;display:block;height:50px;line-height:50px;}
+#demo_menu .top_left li a:hover,#demo_menu .top_left li a:hover span{cursor:pointer;color:#fff;text-decoration:none;}
+#demo_menu .top_left a,#demo_menu .top_left a:visited{font-size:12px;white-space:nowrap;color:#fff;font-family:"宋体", "Times New Roman", Times, serif;line-height:140%;}
+#demo_menu .top_left a:hover{color:#000;font-family:"宋体", "Times New Roman", Times, serif;}
+#demo_menu .top_right{float:right;width:320px;padding:8px 0 0 0;z-index:1000;}
+#bdshare{margin:-5px 0 0 0;}
+</style><title>jQuery实现鼠标滑过图片自动放大的特效_酷站代码 www.5icool.org</title>
+<script src="jquery-1.6.1.min.js"></script>
+<script language="javascript">
+<!--
+//直接加载:hover 图片放大过度不流畅
+$(document).ready(function(){
+	$("#zoom0 img").hover(function(){$(this).addClass("hover")},
+						  function(){$(this).removeClass("hover")}
+						  )	
+})
+
+
+//-->
+</script>
+<style>
+<!--
+body{
+	background:url(images/folder.jpg);
+}
+
+
+#zoom0,#zoom,#zoom1{
+	background-image:url(images/wood-bg2.jpg);
+	width:750px;
+	height:200px;
+	margin:5px auto;
+	padding:10px;
+}
+
+#pic1,#pic2,#pic3{
+	float:left;
+	width:240px;
+	height:190px;
+	margin:5px;
+}
+
+
+#zoom0 img{
+	background:#FFF;
+	width:220px;
+	height:170px;
+	margin:10px;
+	padding:5px;
+}
+
+#zoom0 img.hover{
+	width:240px;
+	height:190px;
+	margin:0px;
+	cursor:pointer;
+}
+
+#zoom1 img{
+	background:#FFF;
+	width:220px;
+	height:170px;
+	margin:10px;
+	padding:5px;
+}
+
+#zoom1 img:hover{
+cursor:pointer;
+-webkit-transform:scale(1.1);
+-moz-transform:scale(1.1);
+-o-transform:scale(1.1);
+}
+
+
+p{
+	height:30px;
+	line-height:30px;
+	color:#FFF;
+	font-size:28px;
+	font-weight:bold;
+	text-shadow:4px 4px 5px #fC0;
+}
+-->
+#foot_bm a{font-size:12px;color:#666;}
+</style>
+
+<style type="text/css">
+.ads300_show,img[src$="/poster/1080x60.gif"] {display:none!important;display:none}</style>
+</head>
+
+<body>
+<p align="center">ZoomIn Jquery+CSS2 </p>
+ <div id="zoom0">
+ 
+	 <div id="pic1"><img src="images/test1.jpg" /></div>
+	 <div id="pic2"><img src="images/test2.jpg" /></div>
+	 <div id="pic3"><img src="images/test0.jpg" /></div>
+ 
+ </div>
+
+<p align="center">ZoomIn CSS3</p> 
+ <div id="zoom1">
+ 
+	 <div id="pic1"><img src="images/test1.jpg" /></div>
+	 <div id="pic2"><img src="images/test2.jpg" /></div>
+	 <div id="pic3"><img src="images/test0.jpg" /></div>
+ 
+ </div>
+ 
+ <br />
+<div align="center" style="clear:both;font-size:12px;color:#666;" id="foot_bm"><a href="http://www.5icool.org/a/201309/1029.html" target="_blank"><strong>jQuery实现鼠标滑过图片自动放大的特效</strong></a>  <a href="http://www.5icool.org/a/201309/1029.html" target="_blank">[源码下载][使用帮助]</a></div><div id="demo_menu">
+<div class="top_menu">
+<div class="top_right">
+<!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+<a class="bds_qzone"></a>
+<a class="bds_tsina"></a>
+<a class="bds_tqq"></a>
+<a class="bds_renren"></a>
+<a class="bds_t163"></a>
+<span class="bds_more"></span>
+<a class="shareCount"></a>
+</div>
+<!-- Baidu Button END -->
+</div>
+<strong></strong>
+<div class="top_left">
+<ul>
+      <li><a href="/">首 页</a></li>
+      <li><a href="/wangyetexiao/">网页特效</a></li>
+      <li><a href="/wangyezhizuo/">网页教程</a></li>
+      <li><a href="/jianzhanziyuan/">建站资源</a></li>
+      <li><a href="/kuzhan/">酷站欣赏</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<p align="center" style="font-size:12px;">代码整理：<a href="http://www.5icool.org/" target="_blank">酷站代码</a>，转载请注明出处。　本代码仅限于学习交流，请勿用于商业用途! </p>
+
+<!-- 广告位：底部728_90图片 -->
+<div align="center" style="margin:20px auto 0 auto;width:728px;z-index:9999;clear:both;"><script type="text/javascript">BAIDU_CLB_singleFillSlot("10305");</script></div>
+
+<!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=13844" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+   var bds_config = {
+		'bdTop':'3',
+		'review':'off',
+		'searchPic':'1',
+		'wbuid':'1752410062',
+		'snsKey':{'tsina':'3445908626'}
+	    }
+  document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000);
+</script>
+<!-- Baidu Button END -->
+</body>
+</html>

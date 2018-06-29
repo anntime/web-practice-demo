@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+	<script type="text/javascript" src="../jquery.js"></script>  
+	<script>
+		var globalData001=0;
+	function yysAjaxJsonpRequest(method,data,url,functi){
+		 
+		
+		$.when($.ajax({
+			 type: method,
+			 async: false,
+			 crossDomain:true,
+			 url: url,
+			 data:data,
+			 dataType: "jsonp",
+			 //传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+			 //jsonp: "callback",
+			 //自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
+			 //jsonpCallback:"itemsListGet",
+			 error: function(XMLHttpRequest, textStatus, errorThrown){
+				console.log("Error:"+XMLHttpRequest.readyState+"   "+XMLHttpRequest.responseText);
+			},
+			 success: functi
+		}) ).done(function(data){  globalData001=data;
+		console.log(globalData001);
+		})
+	 
+		  //return globalData001; 
+ }	
+ function hello(data){
+				//将返回的json数据解析。
+				var jsonobj=eval(data);
+				console.log(data);
+				 
+				
+			 } 
+ var data1={version:0};
+ var CheckUrl="http://172.18.4.179/SmartOrder/CheckVersion";
+ var c;
+ 　$.when(yysAjaxJsonpRequest("POST",data1,CheckUrl))
+
+　　.done(function(){ console.log(globalData001);	})
+
+　　.fail(function(){ alert("出错啦！"); });
+	</script>
+</head>
+
+<body class="bg-1" ms-controller="avalon">
+    <img src="" id="pic0">
+	<img src="" id="pic1">
+	<img src="" id="pic2">
+	<img src="" id="pic3">
+	<img src="" id="pic">
+	hello~~~
+</body>
+
+</html>

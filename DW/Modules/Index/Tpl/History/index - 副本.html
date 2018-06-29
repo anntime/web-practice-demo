@@ -1,0 +1,99 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            body {
+                margin: 0;
+            }
+            #main {
+                height: 100%;
+            }
+        </style>
+		<link href="__PUBLIC__/css/main-baidu.css" rel="stylesheet" type="text/css">
+		<link href="__PUBLIC__/css/history.css" rel="stylesheet" type="text/css">
+		<script src="__PUBLIC__/js/avalon.js"></script>
+		<script>
+            avalon.config({
+                loader: false,
+				interpolate:["{%","%}"]
+            })
+        </script>
+		<script src="__PUBLIC__/js/echarts.js"></script>
+        <script src="__PUBLIC__/js/jquery.min.js"></script>
+		<script src="__PUBLIC__/js/history.js">
+		<script>
+			require.config({
+				paths: {
+					echarts: '../Public/js'
+				},
+				packages: [
+					{
+						name: 'BMap',
+						location: '../Public/js/src',
+						main: 'main'
+					}
+				]
+			});
+
+			require(
+				[
+					'echarts',
+					'BMap',
+					'echarts/chart/map'
+				],
+				DrawEChart
+			); 
+		</script>
+    </head>
+    <body style="-moz-user-select: none;"  ms-controller="avalon">
+		<div class="content-wrap">
+			<!--堆积直方图-->
+			<div id="stackedBar" class="">
+			 好好学习天天向上
+			</div>
+			<!--堆积直方图结束-->
+			<!--右侧的浮层-->
+				<div style="display: block;" class="list-wrap none">
+					<!--客体搜索-->
+						<div style="" class="search-box input-group fl div_region_container">
+							<input city="" province="" style="" autocomplete="off" id="input_cityName" placeholder="请输入查看用户名称" class="form-control input-box" type="text">
+							<div class="search-btn text-center" id="btn_city_search">
+								<a href="javascript:;" class="input-group-addon ">
+								   <i class="i i02"></i>
+								</a>
+							</div>
+						</div>
+					
+					<!--默认显示的按钮组-->
+					<div class="button-box b1 tab_china_move drawMap" ms-visible="init">
+						<span class="btn-group ">
+						<a class="btn btn-default current" command="-1" href="javascript:;" > 活跃用户</a>
+						</span>
+						<span class="btn-group">
+						<a class="btn btn-default" command="0" href="javascript:;">权限热度</a>
+						</span>
+						<span class="btn-group">
+						<a class="btn btn-default" command="1" href="javascript:;">预留按钮</a>
+						</span>
+					</div>
+					
+					<div class="outer-wrap"  >
+						<!--活跃度top10用户-->
+						<div class="div_list_container" ms-visible="indirect">
+							<div class="row" ms-repeat-el="topUser">
+								<span class="serial-number col" >{%$index+1%}</span>
+								<a class="col city-name"  href="javascript:;">{%el.name%}</a>
+								<i class="col i i11"></i>
+								<a class="col-3 city-name" href="javascript:;">{%el.num%}次</a>
+								<span class="percent">
+									<span data="perMil"></span>
+								</span>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			<!--浮层结束-->
+		</div>
+    </body>
+</html>

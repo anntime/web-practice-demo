@@ -1,0 +1,56 @@
+
+.modal-body input, .modal-body textarea, .modal-body .uneditable-input {
+    width: 300px;
+}
+.modal-body .form-horizontal .control-label {
+    width: 100px;
+}
+.modal-body .form-horizontal .controls {
+    margin-left: 120px;
+}
+.main-row .details-link {
+    margin-top: 10px;
+}
+.main-row .details-link a {
+    padding: 8px 18px;
+}
+.main-row .details-link a i {
+    border-bottom: 5px solid transparent;
+    border-left: 6px solid #0082e5;
+    border-top: 5px solid transparent;
+    display: inline-block;
+    height: 0;
+    width: 0;
+}
+.main-row .col-md-6 .details-link a {
+    background-color: #0082e5;
+    color: #fff;
+    display: inline-block;
+}
+.main-row .col-md-6 .details-link a i {
+    border-left-color: #fff;
+}
+.application {
+    background-color: #fafafa;
+    padding: 20px 40px;
+    text-align: center;
+}
+.application .application-content {
+    color: #0082e5;
+    display: inline-block;
+    font-size: 18px;
+}
+.application .application-content .apply-btn {
+    background-color: #70bae7;
+    border-radius: 30px;
+    color: #fff;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 25px;
+    padding: 10px 20px;
+}
+@media (max-width: 442px) {
+.application .application-content .apply-btn {
+    margin-top: 10px;
+}
+}

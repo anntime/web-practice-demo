@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>avalon</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script src="avalon.js"></script>
+		<script src="jquery.min.js"></script>
+        <script>
+           var model =  avalon.define("test", function(vm) {
+                vm.array = [{name: 111}, {name: 222}, {name: 333}]
+                vm.a="hello";
+                vm.change=function(){
+                    if(vm.a=="hello"){
+                        vm.a="nihao";
+                    }else{
+                        vm.a="hello";
+                    }
+                }
+            })
+           console.log(model.array.$model[0].name);
+        </script>
+
+    </head>
+    <body ms-controller="test">
+        <ul>
+            <li ms-repeat-my="array">{{$index}}--{{my.name}}</li>
+        </ul>
+
+        <div>
+            {{a}}<button ms-click="change">change</button>
+        </div>
+    </body>
+</html>

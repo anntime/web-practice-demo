@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>avalon</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script src="http://files.cnblogs.com/rubylouvre/avalon20130929.js"></script>
+        <script>
+            avalon.define("test", function(vm) {
+                vm.array = [[1, 2], [4, 5], [7, 8]]
+            })
+        </script>
+    </head>
+    <body ms-controller="test">
+        <table width="80%" border="1">
+            <tr ms-repeat-item="array">
+                <td ms-repeat-e="item">{{e}}</td>
+            </tr>
+        </table>
+    </body>
+</html>

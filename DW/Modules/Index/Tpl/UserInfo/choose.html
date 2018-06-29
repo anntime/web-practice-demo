@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+	<script src="../public/js/jquery-2.0.3.min.js"></script>
+	    <link href="../public/css/bootstrap.css" rel="stylesheet">
+		<script src="../public/js/bootstrap.min.js"></script>
+	<script>
+	function checkradio(){ 
+		var item = $(":radio:checked"); 
+		var len=item.length; 
+		if(len>0){ 
+		  alert("yes--选中的值为："+$(":radio:checked").val()); 
+		} 
+	}
+
+	</script>
+</head>
+<body>
+<label>请选择您要请求的资源权限</label>
+<div  class="radio">
+   <label>
+      <input type="radio" name="authority" id="1" 
+         value="访问" > 访问
+   </label>
+   <label>
+      <input type="radio" name="authority" id="2" 
+         value="读写">
+         读写
+   </label>
+   <label>
+      <input type="radio" name="authority" id="3" 
+         value="读写删">
+         读写删
+   </label>
+</div>
+
+</body>

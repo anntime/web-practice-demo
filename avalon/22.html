@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<script src="avalon.js"></script>
+		<script>
+			avalon.define({
+				$id:"test",
+				a:1111111,
+				b:2222222
+			});
+		</script>
+	</head>
+	<body ms-controller="test">
+		<input ms-attr-value="{id:{{a}},name:{{b}}}"
+	</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <script src="avalon.js"></script>
+        <script>
+            avalon.define("simple", function(vm) {
+                vm.background = "red"
+                vm.$watch("background", function(v) {
+                    vm.background = v//将数组转换为字符串
+                });
+            })
+			
+			avalon.ready(function() {
+				avalon.define("class", function(vm) {
+					vm.rows = avalon.range(0, 15)
+				});
+				avalon.scan();
+			})
+        </script>
+    </head>
+    <body>
+        <div ms-controller="simple">
+            <div style="width:200px; height:50px" ms-css-background="background">
+ 
+            </div>
+            <select ms-duplex="background">
+                <option value="red">红</option>
+                <option value="yellow">黄</option>
+                <option value="green">绿</option>
+            </select>
+        </div>
+		
+		<table id="classtable" >
+           <thead>
+               <tr>
+                   <th>流程</th>
+                   <th>启动人</th>
+                   <th>启动时间</th>
+                   <th>状态</th>
+               </tr>
+           </thead>
+           <tbody ms-each-row="rows" ms-controller="class" >
+               <tr ms-class="odd:$index % 2"
+                   ms-class-1="even:!($index % 2)"
+                   ms-hover="hover"
+                   >
+                   <td><a href="javascript:void(0)" ms-click="$remove">删除行{{$index}}</a></td>
+                   <td>{{ Math.random().toString(36).substring(2, 15) }}</td>
+                   <td>{{ new Date | date("yyyy-MM-dd HH:mm-ss") }}</td>
+                   <td>{{ $first || $last }}</td>
+               </tr>
+           </tbody>
+       </table>
+		
+    </body>
+</html>

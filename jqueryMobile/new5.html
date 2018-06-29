@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="jquery.mobile-1.3.2.min.css" />
+<script src="jquery.js"></script>
+<script src="jquery.mobile-1.3.2.min.js"></script> 
+
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+<script type="text/javascript" charset="utf-8"> 
+	document.addEventListener("deviceready", onDeviceReady, false);
+	var pictureSource; //  getPicture:数据来源参数的一个常量
+	var destinationType; // getPicture中：设置getPicture的结果类型
+	function onDeviceReady() {
+		 pictureSource = navigator.camera.PictureSourceType;
+		destinationType = navigator.camera.DestinationType;
+	}
+
+	var pickUrl;
+	function fromCamera(source){
+		navigator.camera.getPicture(function(imageURI){
+				var largeImage = document.getElementById('smallImage');
+				largeImage.style.display = 'block';
+				largeImage.src = imageURI;  
+				pickUrl = imageURI;
+			}, function(){
+				if(source==pictureSource.CAMERA)
+					console.log('加载照相机出错!');
+				else
+					console.log('加载相册出错!');
+			}, {
+				quality : 50, 
+				destinationType : destinationType.FILE_URI,
+				sourceType : source
+		});
+	}
+
+   /*********上传图片***************/
+	function uploadFile() {   
+		var imageURI = pickUrl;
+		if(!imageURI)
+			alert('请先选择本地图片');
+		var options = new FileUploadOptions();
+		options.fileKey = "file";
+		options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+		options.mimeType = "image/jpeg";  
+		var ft = new FileTransfer();
+		ft.upload(
+						imageURI,
+						encodeURI('http://192.168.93.114:1988/shandongTree/upload.jsp'),
+						function(){ alert('上传成功!');}, 
+						function(){ alert('上传失败!');},
+						options);
+	}
+
+
+	/**********下载相片***********/
+	function downloadPic(sourceUrl,targetUrl){
+		var fileTransfer = new FileTransfer(); 
+		var uri = encodeURI(sourceUrl);  
+
+		fileTransfer.download(
+		uri,targetUrl,function(entry){ 
+			var smallImage = document.getElementById('smallImage');
+			smallImage.style.display = 'block'; 
+			smallImage.src = entry.fullPath; 
+		},function(error){
+			console.log("下载网络图片出现错误");
+		});  
+	}
+
+
+	function localFile() {
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){ 
+			//创建目录
+			 fileSystem.root.getDirectory("file_mobile/download", {create:true}, 
+				function(fileEntry){ }, 
+				function(){  console.log("创建目录失败");});
+
+			 var _localFile = "file_mobile/download/testtest4.jpg";
+			 var _url = "http://192.168.93.114:1988/shandongTree/download.jsp?pId=13";
+			 //查找文件
+			 fileSystem.root.getFile(_localFile, null, function(fileEntry){
+				//文件存在就直接显示
+				var smallImage = document.getElementById('smallImage');
+				smallImage.style.display = 'block'; 
+				smallImage.src = fileEntry.fullPath;  
+			}, function(){  
+				//否则就到网络下载图片!
+				fileSystem.root.getFile(_localFile, {create:true}, function(fileEntry){
+					var targetURL = fileEntry.toURL();
+					downloadPic(_url,targetURL); 
+				 },function(){
+					alert('下载图片出错');
+				 }); 
+			});
+	
+		}, function(evt){
+			console.log("加载文件系统出现错误");
+		}); 
+    }
+ 
+</script>
+</head>
+<body>
+	<!-- pege 1 -->
+ 		<a data-inline='true'
+				href="javascript:fromCamera(pictureSource.PHOTOLIBRARY)" data-role="button">来自相册</a> 
+			<a data-inline='true'
+				href="javascript:fromCamera(pictureSource.CAMERA)" data-role="button">来自相机</a> 
+			<a data-inline='true'
+				href="javascript:localFile()" data-role="button">显示缓存图片，没有则下载</a> 
+			<a data-inline='true'
+				href="javascript:uploadFile()" data-role="button">上传图片</a> 
+				<div style='height:200px;width:200px;border:1px solid green;align:center;'>
+			<img
+				style="width: 160px; height: 160px;" id="smallImage"
+				src="" />   
+				</div>
+</body>
+</html>

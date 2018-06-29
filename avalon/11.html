@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>avalon</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script src="http://files.cnblogs.com/rubylouvre/avalon20130929.js"></script>
+        <script>
+           var model =  avalon.define("test", function(vm) {
+                vm.array = [{name: 111}, {name: 222}, {name: 333}]
+            })
+            var array = model.array
+            setInterval(function(){
+                array.push({name: Math.random().toString(32).substr(4,14)})
+                if(array.length > 10){
+                    array.shift()
+                }
+            },500)
+        </script>
+    </head>
+    <body ms-controller="test">
+        <ul>
+            <li ms-repeat-q="array">{{$index}}--{{q.name}}</li>
+        </ul>
+    </body>
+</html>

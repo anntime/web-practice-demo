@@ -1,0 +1,184 @@
+<include file ="Common:base_user"/>
+
+    <!-- 内容区 -->
+    <div id="main-content">
+        <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">&times;</button>
+            <div class="alert-content">这是内容</div>
+        </div>
+        <div id="main" class="main">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>用户列表</h2>
+	</div>
+	<div class="cf">
+		<div class="fl">
+            <a class="btn" href="{:U('/Admin/UserManage/userAdd','','')}">新 增</a>
+        </div>
+
+        <!-- 高级搜索 -->
+		<div class="search-form fr cf">
+			<div class="sleft">
+				<input type="text" name="nickname" class="search-input" value="" placeholder="请输入用户昵称或者ID">
+				<a class="sch-btn" href="javascript:;" id="search" url="/OriginalSystem.one/index.php?s=/Admin/User/index.html"><i class="btn-search"></i></a>
+			</div>
+		</div>
+    </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+		<th class="">ID</th>
+		<th class="">昵称</th>
+		<th class="">地址</th>
+		<th class="">访问时间</th>
+		<th class="">IP地址</th>
+		<th class="">经度</th>
+		<th class="">纬度</th>
+		<th class="">操作</th>
+		</tr>
+    </thead>
+    <tbody>
+		
+			<foreach name='userinfo' item='v'>
+			<tr>
+			<td>{$v.id}</td>
+			<td>{$v.username}</td>
+			<td>{$v.province}&nbsp;&nbsp;{$v.city}</td>
+			<td>{$v.visittime|date='y-m-d H:i',###}</td>
+			<td>{$v.ip}</td>
+			<td>{$v.longitude}</td>
+			<td>{$v.latitude}</td>
+			<td name={$id = $v.id}><a href="{:U('/Admin/UserManage/userDel/id/'.$id,'','')}" class="confirm ajax-get">删除</a></td>
+			</tr>
+			</foreach>
+		
+	</tbody>
+    </table>
+	</div>
+    <div class="page">
+        <div>    </div>    </div>
+
+        </div>
+        <div class="cont-ft">
+            <div class="copyright">
+                <div class="fl">CopyRight<a href="http://www.bjut.edu.cn" target="_blank">北京工业大学软件学院</a>管理平台</div>
+                <div class="fr">{$ver|getVersion}</div>
+            </div>
+        </div>
+    </div>
+    <!-- /内容区 -->
+    <script type="text/javascript">
+    (function(){
+        var ThinkPHP = window.Think = {
+            "ROOT"   : "/OriginalSystem.one", //当前网站地址
+            "APP"    : "/OriginalSystem.one/index.php?s=", //当前项目地址
+            "PUBLIC" : "/OriginalSystem.one/Public", //项目公共目录地址
+            "DEEP"   : "/", //PATHINFO分割符
+            "MODEL"  : ["3", "", "html"],
+            "VAR"    : ["m", "c", "a"]
+        }
+    })();
+    </script>
+    <script type="text/javascript" src="/OriginalSystem.one/Public/static/think.js"></script>
+    <script type="text/javascript" src="/OriginalSystem.one/Public/Admin/js/common.js"></script>
+    <script type="text/javascript">
+        +function(){
+            var $window = $(window), $subnav = $("#subnav"), url;
+            $window.resize(function(){
+                $("#main").css("min-height", $window.height() - 130);
+            }).resize();
+
+            /* 左边菜单高亮 */
+            url = window.location.pathname + window.location.search;
+            url = url.replace(/(\/(p)\/\d+)|(&p=\d+)|(\/(id)\/\d+)|(&id=\d+)|(\/(group)\/\d+)|(&group=\d+)/, "");
+            $subnav.find("a[href='" + url + "']").parent().addClass("current");
+
+            /* 左边菜单显示收起 */
+            $("#subnav").on("click", "h3", function(){
+                var $this = $(this);
+                $this.find(".icon").toggleClass("icon-fold");
+                $this.next().slideToggle("fast").siblings(".side-sub-menu:visible").
+                      prev("h3").find("i").addClass("icon-fold").end().end().hide();
+            });
+
+            $("#subnav h3 a").click(function(e){e.stopPropagation()});
+
+            /* 头部管理员菜单 */
+            $(".user-bar").mouseenter(function(){
+                var userMenu = $(this).children(".user-menu ");
+                userMenu.removeClass("hidden");
+                clearTimeout(userMenu.data("timeout"));
+            }).mouseleave(function(){
+                var userMenu = $(this).children(".user-menu");
+                userMenu.data("timeout") && clearTimeout(userMenu.data("timeout"));
+                userMenu.data("timeout", setTimeout(function(){userMenu.addClass("hidden")}, 100));
+            });
+
+	        /* 表单获取焦点变色 */
+	        $("form").on("focus", "input", function(){
+		        $(this).addClass('focus');
+	        }).on("blur","input",function(){
+				        $(this).removeClass('focus');
+			        });
+		    $("form").on("focus", "textarea", function(){
+			    $(this).closest('label').addClass('focus');
+		    }).on("blur","textarea",function(){
+			    $(this).closest('label').removeClass('focus');
+		    });
+
+            // 导航栏超出窗口高度后的模拟滚动条
+            var sHeight = $(".sidebar").height();
+            var subHeight  = $(".subnav").height();
+            var diff = subHeight - sHeight; //250
+            var sub = $(".subnav");
+            if(diff > 0){
+                $(window).mousewheel(function(event, delta){
+                    if(delta>0){
+                        if(parseInt(sub.css('marginTop'))>-10){
+                            sub.css('marginTop','0px');
+                        }else{
+                            sub.css('marginTop','+='+10);
+                        }
+                    }else{
+                        if(parseInt(sub.css('marginTop'))<'-'+(diff-10)){
+                            sub.css('marginTop','-'+(diff-10));
+                        }else{
+                            sub.css('marginTop','-='+10);
+                        }
+                    }
+                });
+            }
+        }();
+    </script>
+    
+	<script src="/OriginalSystem.one/Public/static/thinkbox/jquery.thinkbox.js"></script>
+
+	<script type="text/javascript">
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+	//回车搜索
+	$(".search-input").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
+    //导航高亮
+    highlight_subnav('/OriginalSystem.one/index.php?s=/Admin/User/index.html');
+	</script>
+
+</body>
+</html>

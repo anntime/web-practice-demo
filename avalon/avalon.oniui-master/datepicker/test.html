@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset='utf-8'/>
+    <title>datepicker demo</title>
+    <script src='../avalon.js'></script> 
+</head>
+<body>
+    <div class="demo-show" ms-controller="demo"> 
+        <fieldset style="position: relative; z-index: 2">
+            <legend>使日历可以通过下拉框切换月份和年份的显示</legend>
+            <input ms-widget="datepicker" data-datepicker-change-month-and-year="true" />
+            <p>说明：配置changeMonthAndYear为true使得用户可以通过下拉选项切换月份和年份的显示</p>
+        </fieldset>
+         
+        <script>
+            require(["datepicker/avalon.datepicker"], function(avalon) {
+                var model = avalon.define("demo", function(vm) {
+                    vm.$aOpts = {
+                        dayNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+                    }
+                })
+                avalon.scan();
+            })
+        </script>
+    </div>
+</body>
+</html>

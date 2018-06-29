@@ -1,0 +1,48 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>管理首页|OneThink管理平台</title>
+    <link href="/OriginalSystem.one/Public/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/common.css" media="all">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/module.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/style.css" media="all">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/default_color.css" media="all">
+    <script type="text/javascript" src="__PUBLIC__/js/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/jquery.mousewheel.js"></script>
+    <style>
+        body{padding: 0}
+    </style>
+
+</head>
+<body>
+    <!-- 头部 -->
+    <div class="header">
+        <!-- Logo -->
+        <span class="logo"></span>
+        <!-- /Logo -->
+
+        <!-- 主导航 -->
+        <ul class="main-nav">
+            <li class="current"><a href="/OriginalSystem.one/index.php?s=/Admin/Index/index.html">首页</a></li><li class=""><a href="/OriginalSystem.one/index.php?s=/Admin/Article/mydocument.html">内容</a></li><li class=""><a href="{:U('/Admin/UserManage/index')}">用户</a></li><li class=""><a href="/OriginalSystem.one/index.php?s=/Admin/Config/group.html">系统</a></li><li class=""><a href="/OriginalSystem.one/index.php?s=/Admin/Addons/index.html">扩展</a></li>        </ul>
+        <!-- /主导航 -->
+
+        <!-- 用户栏 -->
+        <div class="user-bar">
+            <a href="javascript:;" class="user-entrance"><i class="icon-user"></i></a>
+            <ul class="nav-list user-menu hidden">
+                <li class="manager">你好，<em title="Admin">Admin</em></li>
+                <li><a href="/OriginalSystem.one/index.php?s=/Admin/User/updatePassword.html">修改密码</a></li>
+                <li><a href="/OriginalSystem.one/index.php?s=/Admin/User/updateNickname.html">修改昵称</a></li>
+                <li><a href="/OriginalSystem.one/index.php?s=/Admin/Public/logout.html">退出</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /头部 -->
+
+    <!-- 边栏 -->
+    <div class="sidebar">
+    </div>
+    <!-- /边栏 -->

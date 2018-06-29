@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ms-include相关实验</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+        <script src="avalon.js">
+        </script>
+        <script>
+			avalon.define("test",function(vm){
+				vm.render=function(){
+					console.log("render");
+				}
+			})
+		</script>
+	</head>
+	<body ms-controller="test">
+		<div ms-include-src="'temp.html'" data-include-rendered='render'></div>
+	</body>
+</html>
